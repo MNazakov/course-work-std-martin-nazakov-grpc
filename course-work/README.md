@@ -1,7 +1,7 @@
 
 # Taskrr 
 
-✨ **A simple task management tool that uses NextJs as a client and BE proxy.** ✨  
+✨ **A simple task management tool that uses NextJs as a client and BE proxy to a grpc Java service.** ✨  
 
 NexJs Client -> Nextjs Service ( REST- acting as a proxy ) -> Java BE (grpc)
 
