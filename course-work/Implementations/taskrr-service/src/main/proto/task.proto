@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option java_package = "com.taskrr.grpc";
+option java_outer_classname = "TaskProto";
+option java_multiple_files = true;
+
+enum TaskStatus {
+    TODO = 0;
+    IN_PROGRESS = 1;
+    DONE = 2;
+}
+
+message Task {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+    TaskStatus status = 4;
+    int32 boardId = 5;
+    string createdAt = 6;
+}
+
+message CreateTaskRequest {
+    string title = 1;
+    string description = 2;
+    TaskStatus status = 3;
+    int32 boardId = 4;
+}
+
+message CreateTaskResponse {
+    Task task = 1;
+}
+
+message UpdateTaskStatusRequest {
+    int32 taskId = 1;
+    TaskStatus status = 2;
+}
+
+message UpdateTaskStatusResponse {
+    bool success = 1;
+}
+
+message GetTasksForBoardRequest {
+    int32 boardId = 1;
+}
+
+message GetTasksForBoardResponse {
+    repeated Task tasks = 1;
+}
+
+message DeleteTaskRequest {
+    int32 id = 1;
+}
+
+message DeleteTaskResponse {
+    bool success = 1;
+}
+
+service TaskService {
+    rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+    rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse);
+    rpc GetTasksForBoard(GetTasksForBoardRequest) returns (GetTasksForBoardResponse);
+    rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+}

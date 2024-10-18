@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option java_package = "com.taskrr.grpc";
+option java_outer_classname = "BoardProto";
+option java_multiple_files = true;
+
+import "task.proto";
+
+message Board {
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+  string created_at = 4;
+  repeated Task tasks = 5;
+}
+
+message CreateBoardRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateBoardResponse {
+  Board board = 1;
+}
+
+message DeleteBoardRequest {
+  int32 id = 1;
+}
+
+message DeleteBoardResponse {
+  bool success = 1;
+}
+
+message ListBoardsRequest {}
+
+message ListBoardsResponse {
+  repeated Board boards = 1;
+}
+
+message GetBoardByIdRequest {
+  int32 id = 1;
+}
+
+message GetBoardByIdResponse {
+  Board board = 1;
+}
+
+service BoardService {
+  rpc CreateBoard(CreateBoardRequest) returns (CreateBoardResponse);
+  rpc DeleteBoard(DeleteBoardRequest) returns (DeleteBoardResponse);
+  rpc ListBoards(ListBoardsRequest) returns (ListBoardsResponse);
+  rpc GetBoardById(GetBoardByIdRequest) returns (GetBoardByIdResponse);
+}

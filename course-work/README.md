@@ -1,25 +1,38 @@
-# Курсова работа
 
-1.	Условие
-Да се създаде система на тема по избор, която да разполага с минимум 2 части и да е свързана с хранилище за данни (база данни, файл и т.н.). Уеб услуги (наричани back-end) и клиент (наричан front-end).
-    1.	Back-end: Уеб услуги 
-Технологии за разработка на уеб услугите с gRPC
-    2.	Front-end: Интуитивен потребителски интерфейс за работа с уеб услугите
-Интерфейса може да бъде както уеб сайт (.Net MVC проект, .Net Web forms …) така конзолно приложение (.Net console application) или мобилно приложение.
+# Taskrr 
 
-2.	Задължителни изисквания за проекта
-И двете части трябва да могат да поддържат минимум CRUD (Create, Read, Update, Delete) операциите за всеки модел от базата. Изисква се подръжка и на четене с client или server stream (по избор).
-    1.	Структура на проекта. protobuf 3 file (наричан по - долу модел)
-        1.	Минимум 3 модела (съобразени с темата на проекта ви)
-        2.	Всеки модел трябва да има минимум 5 полета, от които поне 4 да са с различни типове (int, double, long, DateTime и т.н.)
-        3.	Всеки модел трябва да съдържа поне 1 задължително поле
-    2.	Структурата на уеб услугите и потребителския интерфейс трябва да спазва следните правила
-        1.	Достъпа до уеб услугите трябва да е защитен. Като начина на защита зависи от изпраната технология (JWT token, Username & Password, basic token, сертификат и т.н.)
-        2.	Достъпа до клиента не е необходимо да е защитен
-	
-4.	Примерно точкуване\
-1 точки създаване на услуги за четене и писане\
-1 точки създаване на услуги за stream\
-1 защита на уеб услугите\
-1 създаване на интуитивен клиент\
-Всяка допълнение представлява допълнителни точки (0.25). Пример: прикачване на файл.
+✨ **A simple task management tool that uses NextJs as a client and BE proxy.** ✨  
+
+NexJs Client -> Nextjs Service ( REST- acting as a proxy ) -> Java BE (grpc)
+
+## Tech Stack 🔨
+
+ - Spring Boot
+ - Next.JS 13
+ - gRPC
+ - TailwindCSS
+ - Postgres
+
+## Setting up 🔧
+* Postgres 16 https://www.postgresql.org/
+	* Default user for postgres should be username `postgres` password `root`. ( if they are set up differently you can change the config in `application.properties`
+	* Create a DB called `taskrrdb`
+	* Open the java project in the preferred IDE and run `maven install`
+	* Run `maven compile` to generate the grpc interfaces and models from the `proto` files. `Proto` files are located in the proto folder inside the java folder.
+* Nodejs v.20 ( 20.13.1 ) https://nodejs.org/en
+* Java 17
+
+## Start the app 🚀
+* Open the UI project and run `npm install` to install the needed dependencies.
+* After that run `npm run prepare:grpc` and `npm run generate:grpc` to generate the TS interfaces and services from the proto files.
+* Check `.env.local` file and change the url address of the running grpc service ( if necessary - default port is 9090 )
+* Start he Java project 
+* Start the nextjs project ( `npm run dev` )
+
+## Functionalities ⚡
+* Firstly, create an account by visiting `localhost:(3000)/register`
+* Login from `localhost:(3000)/login`
+* You will be redirected to the dashboard page
+* From the dashboard page you can either `logout` , `preview your current boards` or `create a new board`
+* Clicking a board will present the board details screen. From there you can create tasks, assign statuses to those tasks and delete them
+* You can also delete the boards

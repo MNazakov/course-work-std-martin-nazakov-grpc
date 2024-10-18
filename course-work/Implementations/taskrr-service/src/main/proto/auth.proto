@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_package = "com.taskrr.grpc";
+option java_outer_classname = "AuthProto";
+option java_multiple_files = true;
+
+message User {
+    int32 id = 1;
+    string username = 2;
+    string password = 3;
+}
+
+message RegisterUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message RegisterUserResponse {
+    bool success = 1;
+}
+
+message LoginUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginUserResponse {
+    string token = 1;
+}
+
+service AuthService {
+    rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse);
+    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse);
+}
